@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Karthick R | Full Stack Developer</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="logo"><h1>Karthick</h1> <span>R</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="hire-btn">Hire Me</a>
+  <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+</nav>
+
+<!-- FLASH MESSAGES -->
+{% if messages %}
+<div class="flash-messages">
+  {% for msg in messages %}
+  <div class="flash flash-{{ msg.tags }}">{{ msg }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-text">
+    <p class="hero-label">Full Stack Web Developer</p>
+    <h1>Hi, I'm <span class="name-highlight">Karthick</span></h1>
+    <p class="hero-desc">B.Com CA Graduate passionate about building modern, scalable web applications using Django, Python, HTML, CSS & JavaScript.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://github.com/karthick-gmk" target="_blank" class="btn-secondary">GitHub</a>
+    </div>
+    <div class="hero-links">
+      <a href="https://linkedin.com/in/rkarthickofficial" target="_blank">LinkedIn</a>
+      <a href="mailto:karthickofficial1905@gmail.com">Email</a>
+    </div>
+  </div>
+  <div class="hero-avatar">
+    <img src="{% static 'img/DSC_0069.JPG' %}" alt="Karthick R">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-title">
+    <h2><span>About</span> Me</h2>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi, I'm <strong>Karthick R</strong>, a motivated and detail-oriented B.Com (Computer Applications) graduate (2025) from The American College, Madurai.</p>
+      <p>Skilled in <strong>HTML, CSS, JavaScript, Python & Django</strong>, with hands-on internship experience building real-world web applications including e-commerce platforms, management systems, and dashboards.</p>
+      <p>I enjoy turning ideas into reality through clean code and elegant design. Always eager to learn new technologies and take on challenging projects.</p>
+    </div>
+    <div class="stats-col">
+      <div class="stat-box">
+        <div class="num">4 Month</div>
+        <div class="stat-label">Year of Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">2+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-title">
+    <h2>Skills & <span>Technologies</span></h2>
+    <p>Technologies I work with</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="skills-grid">
+    {% for category, skill_list in skills.items %}
+    <div class="skill-card">
+      <div class="skill-card-title {% if forloop.counter == 2 %}purple{% elif forloop.counter == 3 %}pink{% endif %}">
+        {% if forloop.counter == 1 %}🖥️{% elif forloop.counter == 2 %}⚙️{% else %}🗄️{% endif %}
+        {{ category }}
+      </div>
+      <div class="tags">
+        {% for skill in skill_list %}
+        <span class="tag {% if forloop.parentloop.counter == 2 %}purple{% elif forloop.parentloop.counter == 3 %}pink{% endif %}">{{ skill }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-title">
+    <h2>Featured <span>Projects</span></h2>
+    <p>Some of my recent works</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="projects-grid">
+    {% for project in projects %}
+    <div class="project-card">
+      <div class="proj-thumb">Project {{ project.num }}</div>
+      <div class="proj-body">
+        <p class="proj-num">{{ project.num }} / Django</p>
+        <p class="proj-name">{{ project.name }}</p>
+        <p class="proj-desc">{{ project.desc }}</p>
+        <div class="tags" style="margin-top:.8rem">
+          {% for tag in project.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% if project.url != '#' %}
+        <a href="{{ project.url }}" target="_blank" class="proj-link">View Project →</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-title">
+    <h2><span>Experience</span></h2>
+    <p>My professional journey</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="exp-wrapper">
+    {% for exp in experience %}
+    <div class="exp-card">
+      <div class="exp-dot"></div>
+      <p class="exp-role">{{ exp.role }}</p>
+      <p class="exp-company">{{ exp.company }}</p>
+      <p class="exp-meta">📅 {{ exp.period }} &nbsp;·&nbsp; {{ exp.location }}</p>
+      <ul class="exp-list">
+        {% for point in exp.desc %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+      <div class="exp-tags">
+        {% for tag in exp.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-title">
+    <h2>Get In <span>Touch</span></h2>
+    <p>Let's build something great together</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+      <p>Feel free to reach out for internship opportunities, freelance projects, or just to say hello.</p>
+      <div class="contact-item"><span>📞</span><span>8508970324</span></div>
+      <div class="contact-item"><span>📧</span><span>karthickofficial1905@gmail.com</span></div>
+      <div class="contact-item"><span>📍</span><span>Coimbatore, Tamil Nadu</span></div>
+      <div class="contact-item"><span>🔗</span><a href="https://linkedin.com/in/rkarthickofficial" target="_blank">linkedin.com/in/rkarthickofficial</a></div>
+      <div class="contact-item"><span>🐙</span><a href="https://github.com/karthick-gmk" target="_blank">github.com/karthick-gmk</a></div>
+    </div>
+    <form class="contact-form" action="{% url 'contact' %}" method="POST">
+      {% csrf_token %}
+      <input class="form-input" type="text" name="name" placeholder="Your Name" required/>
+      <input class="form-input" type="email" name="email" placeholder="Your Email" required/>
+      <input class="form-input" type="text" name="subject" placeholder="Subject" required/>
+      <textarea class="form-input" name="message" placeholder="Your Message" required></textarea>
+      <button class="send-btn" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo"><h1>Karthick</h1> <span>R</span></div>
+    <p>Full Stack Web Developer crafting digital experiences with Django & modern web technologies.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">● Contact</a>
+  </div>
+  <div class="footer-col">
+    <h4>Connect With Me</h4>
+    <a href="https://github.com/karthick-gmk" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/rkarthickofficial" target="_blank">LinkedIn</a>
+    <a href="mailto:karthickofficial1905@gmail.com">Email</a>
+  </div>
+</footer>
+<div class="footer-bottom">© 2026 Karthick R. All Rights Reserved. &nbsp;·&nbsp; Made with ❤️ using Django</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
