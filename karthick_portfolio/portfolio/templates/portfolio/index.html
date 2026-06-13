@@ -6,6 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Karthick R — Full Stack Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" id="favicon" type="image/png">
+<script>
+  const fc = document.createElement('canvas');
+  fc.width = fc.height = 64;
+  const fx = fc.getContext('2d');
+  fx.fillStyle = '#0A0A0F';
+  fx.fillRect(0, 0, 64, 64);
+  fx.fillStyle = '#A78BFA';
+  fx.font = 'bold 26px monospace';
+  fx.textAlign = 'center';
+  fx.textBaseline = 'middle';
+  fx.fillText('KR', 32, 32);
+  document.getElementById('favicon').href = fc.toDataURL();
+</script>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
